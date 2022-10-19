@@ -10,7 +10,11 @@ public abstract class Sala {
 
     int qtdReserva =0;
     String dataString;
-    Date data;
+    String horaIncString;
+    String horaFinString;
+    Date[] data;
+    Date[] horaInicial;
+    Date[] horaFinal;
     boolean status = true;
     String numSala;
     int capacidadeSala;
@@ -19,10 +23,13 @@ public abstract class Sala {
     Sala( String numSala, int nReservas){
         this.numSala = numSala;
         qntSalas++;
+        this.data = new Date[nReservas];
+        this.horaInicial = new Date[nReservas];
+        this.horaFinal = new Date[nReservas];
     }
     public abstract String visualizaSalasDisponivel();
     public abstract void reservarSala();
-    public abstract void visualizaReservas();
+    public abstract String visualizaReservas();
 
 
 

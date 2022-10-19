@@ -3,8 +3,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Laboratorio extends Sala{
+
     //variaveis
     public String tipo = "Laboratorio";
+    public String visualizarReserva = "";
 
     //construtor
     public Laboratorio(String tipo, String nome,int nReservas){
@@ -20,35 +22,45 @@ public class Laboratorio extends Sala{
 
         return null;
     }
-    public void visualizaReservas(){
-        if(qtdReserva > 0 && data !=null){
-            System.out.println("Sala"+this.numSala+" tem "+this.qtdReserva+" Reservas");
+    public String visualizaReservas(){
+        if(qtdReserva > 0){
+            visualizarReserva = "Sala"+ this.numSala+" tem "+this.qtdReserva+" Reservas\n";
         }
+        return visualizarReserva;
     }
     public void reservarSala(/*Date tentativa Reserva*/){
+
         //trabalhar essa parte//
-        if(status == true || status){
+        if(status == true){
 
             SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yy");
 
             dataString = JOptionPane.showInputDialog("Digite a data da reserva(dd/MM/yy): \n");
             try{
-                data = sdfData.parse(dataString);
+                data[qtdReserva] = sdfData.parse(dataString);
                 JOptionPane.showMessageDialog(null, data);
                 ///hora = sdfHora.parse(horString);
             }
             catch(Exception e){
                 JOptionPane.showMessageDialog(null, "Formato errado");
+                e.printStackTrace();
             }
-
         }
         else{
             System.out.println("Sala já reservada \n");
+        }
+        for(int i =0;i<qtdReserva;i++){
+            if(data[qtdReserva].equals(data[i])){
+                JOptionPane.showMessageDialog(null, "Essa data não está disponível");
+                return;
+            }
+
         }
         qtdReserva++;
         if(qtdReserva == Sala.nReservas){
             status = false;
         }
+
 
     }
 
